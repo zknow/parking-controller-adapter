@@ -5,7 +5,7 @@ import (
 	"net"
 	"os"
 
-	log "github.com/sirupsen/logrus"
+	log "github.com/gogf/gf/os/glog"
 )
 
 var sockPath = "/tmp/unix.sock"

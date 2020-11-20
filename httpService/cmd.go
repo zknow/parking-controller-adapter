@@ -4,7 +4,7 @@ import (
 	"io"
 	"os"
 
-	log "github.com/sirupsen/logrus"
+	log "github.com/gogf/gf/os/glog"
 
 	"github.com/zknow/parkingChargeAdapter/httpService/routes"
 	"github.com/zknow/parkingChargeAdapter/httpService/service"
@@ -13,10 +13,9 @@ import (
 )
 
 //InitLog 初始化Gin log
-func InitLog(f *os.File) io.Writer {
+func InitLog(f *os.File) {
 	gin.DefaultWriter = io.MultiWriter(f, os.Stdout)
-	log.SetOutput(gin.DefaultWriter)
-	return gin.DefaultWriter
+	log.SetWriter(gin.DefaultWriter)
 }
 
 //Serve 對外的api服務

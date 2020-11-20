@@ -1,13 +1,12 @@
 package main
 
 import (
-	"fmt"
 	"os"
 	"os/signal"
 	"syscall"
 	"time"
 
-	log "github.com/sirupsen/logrus"
+	log "github.com/gogf/gf/os/glog"
 	flock "github.com/theckman/go-flock"
 	"github.com/zknow/parkingChargeAdapter/httpService"
 	"github.com/zknow/parkingChargeAdapter/unixService"
@@ -20,6 +19,8 @@ func main() {
 		log.Warning("ParkingChargeAdapter 正在執行")
 	}
 	defer func() { _ = l.Unlock() }()
+
+	log.SetFlags(log.F_TIME_STD | log.F_FILE_SHORT)
 
 	e := createEventPool()
 	go httpService.Serve(e)
@@ -35,7 +36,7 @@ func createEventPool() chan map[string]interface{} {
 
 // 監聽安全退出
 func safeExitNotify() {
-	fmt.Println("[Info] start listen quit signal ...")
+	log.Info("Start listen quit signal ...")
 	sigs := make(chan os.Signal, 1)
 	signal.Notify(sigs, syscall.SIGINT)
 	log.Info("Get signal : ", <-sigs)
