@@ -1,5 +1,5 @@
 ﻿
-# Parking Fee Adapter Service
+# Parking Charge Adapter Service
   
 + 提供前端+後台與車柱控制器間的請求轉傳中介點.
 
